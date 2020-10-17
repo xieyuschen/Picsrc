@@ -1,9 +1,11 @@
 package util
 
 import (
-	"database/sql"
 	"fmt"
 	"github.com/jinzhu/gorm"
+
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 type Image struct {
@@ -25,14 +27,21 @@ func dsn(settings DbSettings) string {
 	// Add ?parseTime=true
 	return fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&charset=utf8", settings.username,settings.password, settings.hostname,settings.dbname)
 }
+func Check(err error){
+	if err!=nil{
+		log.Panic(err)
+	}
+}
 func init(){
 	settings := DbSettings{username: "root",password: "root",hostname: "127.0.0.1:3306",dbname: "imagedb"}
 	//"root:@tcp(127.0.0.1:3306)/?parseTime=true&charset=utf8"
 	connStr := dsn(settings)
-	msdb, _:= sql.Open("mysql",connStr)
+	msdb, err:= sql.Open("mysql",connStr)
+	Check(err)
 	msdb.Exec("create database if not exists "+settings.dbname+" character set utf8")
 	msdb.Close()
-	db, _= gorm.Open("mysql",dsn(settings))
+	db, err = gorm.Open("mysql",dsn(settings))
+	Check(err)
 	if !db.HasTable(&ImageType){
 		db.CreateTable(&ImageType)
 		log.Println("Create Image table successfully")
