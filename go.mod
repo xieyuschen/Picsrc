@@ -1,4 +1,4 @@
-module gomod
+module Picrsc
 
 go 1.15
 
