@@ -19,9 +19,12 @@ func main() {
 func UploadFile(c *gin.Context){
 		// single file
 		file, _ := c.FormFile("file")
+		tag := c.PostForm("tag")
 		file.Filename =util.ParseFileName(file.Filename)
 		dir,_:=os.Getwd()
 
 		c.SaveUploadedFile(file, dir+"/Files/"+file.Filename)
+		image := util.Image{Url:dir+"/Files/"+file.Filename,IsDelete:true,Tag:tag}
+		util.AddImage(image)
 		c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
 }
