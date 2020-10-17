@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"Picrsc/util"
+	"strconv"
 )
 
 func main() {
@@ -18,13 +19,22 @@ func main() {
 }
 func UploadFile(c *gin.Context){
 		// single file
-		file, _ := c.FormFile("file")
+		file, err := c.FormFile("file")
+		util.Check(err)
 		tag := c.PostForm("tag")
 		file.Filename =util.ParseFileName(file.Filename)
-		dir,_:=os.Getwd()
-
+		dir,err:=os.Getwd()
+		util.Check(err)
 		c.SaveUploadedFile(file, dir+"/Files/"+file.Filename)
 		image := util.Image{Url:dir+"/Files/"+file.Filename,IsDelete:true,Tag:tag}
 		util.AddImage(image)
 		c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+}
+func GetImages(c *gin.Context){
+	page,_ :=strconv.Atoi( c.Query("page"))
+	pagesize,_ := strconv.Atoi(c.Query("pagesize"))
+	images := util.GetImages(page,pagesize)
+	c.JSON(http.StatusOK,gin.H{
+		"iamges":images,
+	})
 }

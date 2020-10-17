@@ -27,11 +27,7 @@ func dsn(settings DbSettings) string {
 	// Add ?parseTime=true
 	return fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&charset=utf8", settings.username,settings.password, settings.hostname,settings.dbname)
 }
-func Check(err error){
-	if err!=nil{
-		log.Panic(err)
-	}
-}
+
 func init(){
 	settings := DbSettings{username: "root",password: "root",hostname: "127.0.0.1:3306",dbname: "imagedb"}
 	//"root:@tcp(127.0.0.1:3306)/?parseTime=true&charset=utf8"
@@ -49,4 +45,8 @@ func init(){
 }
 func AddImage(image Image){
 	db.Create(&image)
+}
+func GetImages(page int,pagesize int)(images []Image){
+	db.Limit(pagesize).Offset(page*pagesize).Find(&images)
+	return
 }
