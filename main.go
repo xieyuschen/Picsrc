@@ -14,7 +14,8 @@ func main() {
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 20  // 8 MiB
 	router.POST("/upload", UploadFile)
-
+	router.GET("/getimages",GetImages)
+	router.GET("/",Helloworld)
 	router.Run(":8080")
 }
 func UploadFile(c *gin.Context){
@@ -36,5 +37,10 @@ func GetImages(c *gin.Context){
 	images := util.GetImages(page,pagesize)
 	c.JSON(http.StatusOK,gin.H{
 		"iamges":images,
+	})
+}
+func Helloworld(c *gin.Context){
+	c.JSON(http.StatusOK,gin.H{
+		"msg":"helloworld",
 	})
 }
