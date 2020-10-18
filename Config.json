@@ -1,0 +1,9 @@
+{
+    "DbSettings":{
+        "username":"root",
+        "password" :"root",
+        "hostname" :"127.0.0.1:3306",
+        "dbname" :"imagedb"
+    },
+    "blabla":"xxx"
+}
