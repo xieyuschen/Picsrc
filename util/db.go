@@ -15,26 +15,26 @@ type Image struct {
 	Tag string
 }
 type DbSettings struct{
-	username string
-	password string
-	hostname string
-	dbname string
+	Username string `json:username`
+	Password string	`json:password`
+	Hostname string `json:hostname`
+	Dbname   string `json:dbname`
 }
 var ImageType Image
 var db *gorm.DB
 func dsn(settings DbSettings) string {
 	// https://stackoverflow.com/questions/45040319/unsupported-scan-storing-driver-value-type-uint8-into-type-time-time
 	// Add ?parseTime=true
-	return fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&charset=utf8", settings.username,settings.password, settings.hostname,settings.dbname)
+	return fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&charset=utf8", settings.Username,settings.Password, settings.Hostname,settings.Dbname)
 }
 
 func init(){
-	settings := DbSettings{username: "root",password: "root",hostname: "127.0.0.1:3306",dbname: "imagedb"}
+	settings := DbSettings{Username: "root", Password: "root", Hostname: "127.0.0.1:3306", Dbname: "imagedb"}
 	//"root:@tcp(127.0.0.1:3306)/?parseTime=true&charset=utf8"
 	connStr := dsn(settings)
 	msdb, err:= sql.Open("mysql",connStr)
 	Check(err)
-	msdb.Exec("create database if not exists "+settings.dbname+" character set utf8")
+	msdb.Exec("create database if not exists "+settings.Dbname +" character set utf8")
 	msdb.Close()
 	db, err = gorm.Open("mysql",dsn(settings))
 	Check(err)

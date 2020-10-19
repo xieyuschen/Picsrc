@@ -1,9 +1,8 @@
 {
     "DbSettings":{
-        "username":"root",
-        "password" :"root",
-        "hostname" :"127.0.0.1:3306",
-        "dbname" :"imagedb"
-    },
-    "blabla":"xxx"
+        "Username":"root",
+        "Password" :"root",
+        "Hostname" :"127.0.0.1:3306",
+        "Dbname" :"imagedb"
+    }
 }
