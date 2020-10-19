@@ -29,8 +29,7 @@ func dsn(settings DbSettings) string {
 }
 
 func init(){
-	settings := DbSettings{Username: "root", Password: "root", Hostname: "127.0.0.1:3306", Dbname: "imagedb"}
-	//"root:@tcp(127.0.0.1:3306)/?parseTime=true&charset=utf8"
+	settings := ReadSetting("Config.json")
 	connStr := dsn(settings)
 	msdb, err:= sql.Open("mysql",connStr)
 	Check(err)
