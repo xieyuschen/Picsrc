@@ -4,9 +4,9 @@ A simple Web api implement by gin to upload and show Images.
 # Api
 ## 所需环境
 - 使用mysql数据库进行图片信息的存储，所需信息需要在`Config.json`进行设置。
+- 注意本地需要有名为`Dbname`所指名称的`database`
 ```json
-//设置mysql的连接选项
-//注意本地需要有名为Dbname的内容
+
 {
     "DbSettings":{
         "Username":"root",
@@ -21,18 +21,17 @@ A simple Web api implement by gin to upload and show Images.
 首先需要安装go环境，然后在`main.go`目录下运行`go run main.go`。当然好像这个东西不需要前端搞，需要我把它扔到服务器上面去。
 ## Api列表
 ### 1.upload
-post方法，完成图像资源的上传。
+post方法，完成图像资源的上传。数据放在data-form中
 所需参数：
 ```json
 {
-    //暂时未对可上传文件后缀名进行限制
-    "file":"upload a file",//choose a picture to load
+    "file":"choose a picture to load",
     "tag":"Add tag for this picture"
 }
 ```
 上传文件大小限制为8MiB
 ### 2. getimages
-get方法，获取一定数目的图片信息
+get方法，获取一定数目的图片信息，数据放在params里面
 ```json
 {
     "page":"get the certain page based 0",
