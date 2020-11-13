@@ -1,41 +1,37 @@
 # Picsrc
 A simple Web api implement by gin to upload and show Images.
 
-# Api
-## 所需环境
-- 使用mysql数据库进行图片信息的存储，所需信息需要在`Config.json`进行设置。
-- 注意本地需要有名为`Dbname`所指名称的`database`
-```json
-
-{
-    "DbSettings":{
-        "Username":"root",
-        "Password" :"root",
-        "Hostname" :"127.0.0.1:3306",
-        "Dbname" :"imagedb"
-    }
-}
-``` 
-
-## 如何启动后端程序
-首先需要安装go环境，然后在`main.go`目录下运行`go run main.go`。当然好像这个东西不需要前端搞，需要我把它扔到服务器上面去。
 ## Api列表
-### 1.upload
-post方法，完成图像资源的上传。数据放在data-form中
-所需参数：
+### /api/pircture
+- post方法
+用于上传一张图片  
+前端输入：
+    - file:选一个图片上传
+    - tag:给图片加的一个标签
+后端返回：    
 ```json
 {
-    "file":"choose a picture to load",
-    "tag":"Add tag for this picture"
+    
 }
 ```
-上传文件大小限制为8MiB
-### 2. getimages
-get方法，获取一定数目的图片信息，数据放在params里面
+
+- get方法
+获取上传的信息  
+    - page:获取第几页的图片
+    - page_size:每页有几张图片
+后端返回：
 ```json
 {
-    "page":"get the certain page based 0",
-    "pagesize":"how many images in a page"
+    "iamges": [
+        {
+            "ID": 1,
+            "CreatedAt": "2020-10-19T07:20:13Z",
+            "UpdatedAt": "2020-10-19T07:20:13Z",
+            "DeletedAt": null,
+            "Url": "localhost:8080/Files/1603092013.jpg",
+            "IsDelete": true,
+            "Tag": "test"
+        }
+    ]
 }
 ```
-返回`pagesize`数目的图片信息，这里不返回图片本身而是一个相对url。配置一下nginx就可以用了。  
