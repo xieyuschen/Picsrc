@@ -2,7 +2,7 @@
 A simple Web api implement by gin to upload and show Images.
 
 ## Api列表
-### /api/pircture
+### /api/picture
 - post方法
 用于上传一张图片  
 前端输入：
