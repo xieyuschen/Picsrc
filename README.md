@@ -7,11 +7,12 @@ A simple Web api implement by gin to upload and show Images.
 用于上传一张图片  
 前端输入：
     - file:选一个图片上传
-    - tag:给图片加的一个标签
+    - tag:给图片加的一个标签(现在暂时没什么用,可以跳过)
+    - token:上传输入的密钥，密钥不正确不能上传文件
 后端返回：    
 ```json
 {
-    
+    "msg": "blabla"
 }
 ```
 

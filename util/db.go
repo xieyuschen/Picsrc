@@ -15,13 +15,18 @@ type Image struct {
 	Tag string
 }
 type DbSettings struct{
-	Username string `json:username`
-	Password string	`json:password`
-	Hostname string `json:hostname`
-	Dbname   string `json:dbname`
+	Username string `json:"Username"`
+	Password string	`json:"Password"`
+	Hostname string `json:"Hostname"`
+	Dbname   string `json:"Dbname"`
+}
+type JsonSettings struct {
+	DbSettings DbSettings `json:"DbSettings"`
+	Token string `json:"Token"`
 }
 var ImageType Image
 var db *gorm.DB
+var Settings JsonSettings
 func dsn(settings DbSettings) string {
 	// https://stackoverflow.com/questions/45040319/unsupported-scan-storing-driver-value-type-uint8-into-type-time-time
 	// Add ?parseTime=true
@@ -29,13 +34,13 @@ func dsn(settings DbSettings) string {
 }
 
 func init(){
-	settings := ReadSetting("Config.json")
-	connStr := dsn(settings)
+	Settings = ReadSetting("Config.json")
+	connStr := dsn(Settings.DbSettings)
 	msdb, err:= sql.Open("mysql",connStr)
 	Check(err)
-	msdb.Exec("create database if not exists "+settings.Dbname +" character set utf8")
+	msdb.Exec("create database if not exists "+ Settings.DbSettings.Dbname +" character set utf8")
 	msdb.Close()
-	db, err = gorm.Open("mysql",dsn(settings))
+	db, err = gorm.Open("mysql",connStr)
 	Check(err)
 	if !db.HasTable(&ImageType){
 		db.CreateTable(&ImageType)
