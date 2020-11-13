@@ -8,7 +8,7 @@ A simple Web api implement by gin to upload and show Images.
 前端输入：
     - file:选一个图片上传
     - tag:给图片加的一个标签(现在暂时没什么用,可以跳过)
-    - token:上传输入的密钥，密钥不正确不能上传文件
+    - token:上传输入的密钥，密钥不正确不能上传文件  
 后端返回：    
 ```json
 {
@@ -19,7 +19,7 @@ A simple Web api implement by gin to upload and show Images.
 - get方法
 获取上传的信息  
     - page:获取第几页的图片
-    - page_size:每页有几张图片
+    - page_size:每页有几张图片  
 后端返回：
 ```json
 {
