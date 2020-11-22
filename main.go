@@ -54,7 +54,7 @@ func GetImages(c *gin.Context){
 	pagesize,_ := strconv.Atoi(c.Query("page_size"))
 	images := util.GetImages(page,pagesize)
 	c.JSON(http.StatusOK,gin.H{
-		"iamges":images,
+		"images":images,
 	})
 }
 func Helloworld(c *gin.Context){
