@@ -35,8 +35,7 @@ func dsn(settings DbSettings) string {
 func init(){
 	Settings = ReadSetting("Config.json")
 	connStr := dsn(Settings.DbSettings)
-	db, err := gorm.Open("mysql",connStr)
-	Check(err)
+	db, _ = gorm.Open("mysql",connStr)
 	if !db.HasTable(&ImageType){
 		db.CreateTable(&ImageType)
 		log.Println("Create Image table successfully")
