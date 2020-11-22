@@ -1,6 +1,7 @@
 package main
 
 import (
+"os"
 	"Picrsc/util"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -9,6 +10,7 @@ import (
 )
 
 func main() {
+
 	router := gin.Default()
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 17  // 8 MiB
@@ -21,7 +23,7 @@ func main() {
 	router.Run(":8080")
 }
 func UploadFile(c *gin.Context){
-		// single file
+	
 	file, err := c.FormFile("file")
 	tag := c.PostForm("tag")
 	token:=c.PostForm("token")
@@ -37,15 +39,18 @@ func UploadFile(c *gin.Context){
 			})
 			return
 		}
+str, _ := os.Getwd()
+fmt.Println(str)
 		util.Check(err)
 		file.Filename =util.ParseFileName(file.Filename)
 
-		err=c.SaveUploadedFile(file, "../Files/"+file.Filename)
-		fmt.Println(err.Error())
+		c.SaveUploadedFile(file, "../Picsrc/Files/"+file.Filename)
+		
 		image := util.Image{Url:"146.56.199.136/Files/"+file.Filename,IsDelete:false,Tag:tag}
 		util.AddImage(image)
 		c.JSON(http.StatusOK, gin.H{
 			"msg":"成功上传图片",
+			"filename":file.Filename,
 		})
 	return
 }
