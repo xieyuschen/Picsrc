@@ -2,6 +2,7 @@ package main
 
 import (
 	"Picrsc/util"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -39,8 +40,9 @@ func UploadFile(c *gin.Context){
 		util.Check(err)
 		file.Filename =util.ParseFileName(file.Filename)
 
-		c.SaveUploadedFile(file, "localhost/Files/"+file.Filename)
-		image := util.Image{Url:"localhost/Files/"+file.Filename,IsDelete:false,Tag:tag}
+		err=c.SaveUploadedFile(file, "../Files/"+file.Filename)
+		fmt.Println(err.Error())
+		image := util.Image{Url:"146.56.199.136/Files/"+file.Filename,IsDelete:false,Tag:tag}
 		util.AddImage(image)
 		c.JSON(http.StatusOK, gin.H{
 			"msg":"成功上传图片",
