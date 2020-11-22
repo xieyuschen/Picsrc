@@ -15,9 +15,8 @@ func main() {
 	{
 		pic.POST("", UploadFile)
 		pic.GET("",GetImages)
-		pic.GET("/",Helloworld)
+		pic.GET("/hello",Helloworld)
 	}
-
 	router.Run(":8080")
 }
 func UploadFile(c *gin.Context){
