@@ -20,3 +20,5 @@
 
 # ignore txt file
 .txt
+
+Config.json

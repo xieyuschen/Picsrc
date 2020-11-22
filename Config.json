@@ -1,9 +1,0 @@
-{
-    "DbSettings":{
-        "Username":"root",
-        "Password" :"root",
-        "Hostname" :"127.0.0.1:3306",
-        "Dbname" :"imagedb"
-    },
-    "Token": "123456"
-}

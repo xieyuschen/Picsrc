@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 
-	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
@@ -36,11 +35,7 @@ func dsn(settings DbSettings) string {
 func init(){
 	Settings = ReadSetting("Config.json")
 	connStr := dsn(Settings.DbSettings)
-	msdb, err:= sql.Open("mysql",connStr)
-	Check(err)
-	msdb.Exec("create database if not exists "+ Settings.DbSettings.Dbname +" character set utf8")
-	msdb.Close()
-	db, err = gorm.Open("mysql",connStr)
+	db, err := gorm.Open("mysql",connStr)
 	Check(err)
 	if !db.HasTable(&ImageType){
 		db.CreateTable(&ImageType)
