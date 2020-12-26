@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  color: black;
+}
+img {
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.logo{
+  position: relative;
+  left: 100px;
+  -webkit-animation:rotateImg 5s linear infinite;
+  vertical-align: middle;
+
+}
+
+@keyframes rotateImg {
+  0% {transform : rotate(0deg);}
+  100% {transform : rotate(360deg);}
+}
+
+@-webkit-keyframes rotateImg {
+  0%{-webkit-transform : rotate(0deg);}
+  100%{-webkit-transform : rotate(360deg);}
+}
+
+@font-face {
+  font-family: "HYQiHeiY4-35W";
+  src: url("../font/HYQiHeiY4-35W.otf");
+}
+@font-face {
+  font-family: "HYQiHeiY4-45W";
+  src: url("../font/HYQiHeiY4-45W.otf");
+}
+@font-face {
+  font-family: "HYQiHeiY4-55W";
+  src: url("../font/HYQiHeiY4-55W.otf");
+}
+@font-face {
+  font-family: "Gotham Medium";
+  src: url("../font/GOTHAM-MEDIUM.TTF");
+}
+@font-face {
+  font-family: "Minument Extened-Regular";
+  src: url("../font/MonumentExtended-Regular.otf");
+}
+@font-face{
+  font-family: "Gilroy-Medium";
+  src: url('../fonts/Gilroy-Medium.ttf');
+}
