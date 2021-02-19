@@ -41,10 +41,14 @@ func init(){
 		log.Println("Create Image table successfully")
 	}
 }
-func AddImage(image Image){
-	db.Create(&image)
+func AddImage(image *Image){
+	db.Create(image)
 }
-func GetImages(page int,pagesize int)(images []Image){
-	db.Limit(pagesize).Offset(page*pagesize).Find(&images)
+func GetImages(page int, pageSize int,tag string)(images []Image){
+	db.Where("tag=?",tag).Limit(pageSize).Offset(page* pageSize).Find(&images)
+	return
+}
+func DeleteImage(id int)(err error){
+	err=db.Where("id=?",id).Delete(&Image{}).Error
 	return
 }
