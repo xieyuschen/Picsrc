@@ -1,7 +1,8 @@
 package main
 
 import (
-"os"
+	"os"
+	"github.com/gin-contrib/cors"
 	"Picrsc/util"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -12,10 +13,12 @@ import (
 func main() {
 
 	router := gin.Default()
+	router.Use(cors.Default())
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 17  // 8 MiB
 	pic:= router.Group("/api/picture")
 	{
+		pic.Use(cors.Default())
 		pic.POST("", UploadFile)
 		pic.GET("",GetImages)
 		pic.GET("/hello",Helloworld)
@@ -25,7 +28,9 @@ func main() {
 }
 func UploadFile(c *gin.Context){
 	file, err := c.FormFile("file")
-	util.Check(err)
+	if err!=nil{
+		fmt.Println(err.Error())
+	}
 	tag := c.PostForm("tag")
 	token:=c.PostForm("token")
 	if token!=util.Settings.Token{
@@ -34,7 +39,7 @@ func UploadFile(c *gin.Context){
 		})
 		return
 	}
-	if file.Size>5*(2 << 20){
+	if (file.Size>5*(2 << 20)){
 			c.JSON(http.StatusBadRequest,gin.H{
 				"msg":"文件太大",
 			})

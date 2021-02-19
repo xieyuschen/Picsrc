@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+a {
+    text-decoration: none;
+}
+
+p, span {
+    line-height: 20px;
+}
+
+.my-header, #featured, #content, #footer {
+    overflow: hidden;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1024px;
+}
+@font-face {
+    font-family:MonumentExtended-Regular;
+    src: url('../fonts/MonumentExtended-Regular.otf');
+}
+@font-face {
+    font-family:Gotham-Medium;
+    src: url('../fonts/Gotham-Medium(1).ttf');
+}
+@font-face {
+    font-family:HYQiHeiY3-35W;
+    src: url('../fonts/HYQiHeiY3-35W.otf');
+}
+@font-face{
+    font-family: HYQiHeiY3-45W;
+    src: url('../fonts/HYQiHeiY3-45W.otf');
+}
+@font-face{
+    font-family: Gilroy-Medium;
+    src: url('../fonts/Gilroy-Medium.ttf');
+}
+
+.clear {
+    clear: both;
+}
+.my-header {
+    box-sizing: border-box;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 9;
+    text-align: center;
+    padding: 0 150px;
+}
+.my-header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.my-header ul li {
+    font-family:Gotham-Medium;
+    padding: 60px 0;
+}
+.my-container{
+    position: absolute;
+    left: 7.5vw;
+    top: 90px;
+
+}
+
+.my-container span{
+    font-family: HYQiHeiY3-35W;
+}
+/* footer{
+    position: absolute;
+    right: 0px;
+    bottom:0px;
+    padding:20px 150px ;
+} */
+.weixin{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    padding:20px 150px ;
+}
+
+.logo{
+    position: relative;
+    left: 100px;
+    -webkit-animation:rotateImg 5s linear infinite;
+    vertical-align: middle;
+
+}
+
+@keyframes rotateImg {
+    0% {transform : rotate(0deg);}
+    100% {transform : rotate(360deg);}
+}
+
+@-webkit-keyframes rotateImg {
+    0%{-webkit-transform : rotate(0deg);}
+    100%{-webkit-transform : rotate(360deg);}
+}
