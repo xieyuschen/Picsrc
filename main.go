@@ -51,7 +51,7 @@ func UploadFile(c *gin.Context){
 	file.Filename =util.ParseFileName(file.Filename)
 	err=c.SaveUploadedFile(file, "../Picsrc/Files/"+file.Filename)
 
-	image := util.Image{Url:"146.56.199.136/Files"+file.Filename,IsDelete:false,Tag: tag}
+	image := util.Image{Url:"146.56.199.136/Files/"+file.Filename,IsDelete:false,Tag: tag}
 	util.AddImage(&image)
 	c.JSON(http.StatusOK, gin.H{
 		"filename":file.Filename,
